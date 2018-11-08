@@ -35,8 +35,8 @@ from time import sleep
 # "OS details: DD-WRT v24.sp2 (Linux 2.4.37), Linux 3.2 " \n
 
 #Kafka connection details
-producer = KafkaProducer(bootstrap_servers='localhost:9092')
-kafkaStream = KafkaUtils.createStream(ssc, 'cdh57-01-node-01.moffatt.me:2181', 'spark-streaming', {'iotdeviceinfo':1})
+producer = KafkaProducer(bootstrap_servers='35.226.74.108:9092')
+kafkaStream = KafkaUtils.createStream(ssc, 'cdh57-01-node-01.moffatt.me:2181', 'spark-streaming', {'testdata':1})
 parsed = kafkaStream.map(lambda v: json.loads(v[1]))
 
 # Set Spark details
