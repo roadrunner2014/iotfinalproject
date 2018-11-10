@@ -4,7 +4,8 @@ import time
 from kafka import SimpleProducer, KafkaClient
 
 # connect to Kafka broker
-kafka = KafkaClient('localhost:9092')
+#kafka = KafkaClient('localhost:9092')
+kafka = KafkaClient('35.226.74.108:9092')
 producer = SimpleProducer(kafka)
 # assign a topic
 topic = 'testdata'
@@ -122,12 +123,13 @@ class IoTdeviceScanData(object):
         print("Operating System: {}").format(self.opertingsystem)
 
 
-def sendiotdata(totaliotdevices):
-	while iotdevice < totaliotdevices:
-		producer.send_messages(topic,iotdeviceinfo
+def sendiotdata(totaldevices):
+	iotdeviceinfo = IoTdeviceScanData(randomip(1), openport(), stateport(), serviceport(openport()), portos(serviceport(openport())),os())
+	while iotdevice < totaldevices:
+		producer.send_messages(topic,iotdeviceinfo)
 
-iotdeviceinfo = IoTdeviceScanData(randomip(1), openport(), stateport(), serviceport(openport()), portos(serviceport(openport())),os())
+totaliotdevices = int(raw_input("Enter total IoT devices: "))
 
-
-
+# Send IoT device info to Kafka broker
+sendiotdata(totaliotdevices)
 
