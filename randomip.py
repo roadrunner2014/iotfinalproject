@@ -1,4 +1,14 @@
+#-------- randomip.py ---------------------------------
 from numpy import random
+import time
+from kafka import SimpleProducer, KafkaClient
+
+# connect to Kafka broker
+kafka = KafkaClient('localhost:9092')
+producer = SimpleProducer(kafka)
+# assign a topic
+topic = 'testdata'
+
 
 
 def randomip(y):
@@ -112,5 +122,12 @@ class IoTdeviceScanData(object):
         print("Operating System: {}").format(self.opertingsystem)
 
 
-iotdevice = IoTdeviceScanData(randomip(1), openport(), stateport(), serviceport(openport()), portos(serviceport(openport())),os())
-print iotdevice
+def sendiotdata(totaliotdevices):
+	while iotdevice < totaliotdevices:
+		producer.send_messages(topic,iotdeviceinfo
+
+iotdeviceinfo = IoTdeviceScanData(randomip(1), openport(), stateport(), serviceport(openport()), portos(serviceport(openport())),os())
+
+
+
+
