@@ -135,6 +135,7 @@ def sendiotdata(totaldevices,topic):
 		iotstring = {"Operating System": "%s" %iotdeviceinfo.operatingsystem, "Port OS": "%s" %iotdeviceinfo.portoperatingsystem, "Port state": "%s" %iotdeviceinfo.portstate, "Port protocol": "%s" %iotdeviceinfo.portservice, "Open ports": "%s" %iotdeviceinfo.openports, "Initial IP Address": "%s" %iotdeviceinfo.ip_addr}
         	print iotstring
 		#producer.send(topic,iotstring)
+		time.sleep(3)
 		iotdevice += 1
 		print('')
 
