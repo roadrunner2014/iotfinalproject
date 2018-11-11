@@ -1,14 +1,6 @@
-#-------- randomip.py ---------------------------------
+#-------- randomiotinfo.py ---------------------------------
 from numpy import random
 import time
-from kafka import SimpleProducer, KafkaClient
-
-# connect to Kafka broker
-#kafka = KafkaClient('localhost:9092')
-#kafka = KafkaClient('35.226.74.108:9092')
-#producer = SimpleProducer(kafka)
-# assign a topic
-topic = 'test'
 
 
 
@@ -34,7 +26,7 @@ def randomip(y):
 
 def openport():
     randport = str()
-    op = random.randint(0,20)
+    op = random.randint(0,12)
     if op <= 2 or op > 14:
         randport = 'none'
     elif op > 2 and op <= 4:
@@ -52,7 +44,7 @@ def openport():
     return randport
 
 def stateport():
-    xx = random.randint(0,5)
+    xx = random.randint(0,6)
     if xx < 4:
         statept = 'open'
     else:
@@ -104,8 +96,12 @@ def os():
         sys = 'RealVNC Enterprise'
     return sys
 
+def jsonconver(a):
+	js = json.loads(a)
+	return js
+
 class IoTdeviceScanData(object):
-    def __init__(self, ip_addr, openports, portstate, portservice, portoperatingsystem, opertingsystem):
+    def __init__(self, ip_addr, openports, portstate, portservice, portoperatingsystem, operatingsystem):
         print("Scanning IoT devices for vulnerabilities...")
 
         self.ip_addr = ip_addr
@@ -113,27 +109,33 @@ class IoTdeviceScanData(object):
         self.portstate = portstate
         self.portservice = portservice
         self.portoperatingsystem = portoperatingsystem
-        self.opertingsystem = opertingsystem
+        self.operatingsystem = operatingsystem
 
         print("Initial IP Address: {}".format(self.ip_addr))
         print("Open ports: {}".format(self.openports))
         print("Port state: {}").format(self.portstate)
         print("Port protocol: {}".format(self.portservice))
         print("Port OS: {}").format(self.portoperatingsystem)
-        print("Operating System: {}").format(self.opertingsystem)
+        print("Operating System: {}").format(self.operatingsystem)
+	
 
-
-def sendiotdata(totaldevices):
+def sendiotdata(totaldevices,topic):
 	iotdevice = 1
 	while iotdevice <= totaldevices:
 		print("IoT device no."), iotdevice
 		iotdeviceinfo = IoTdeviceScanData(randomip(1), openport(), stateport(), serviceport(openport()), portos(serviceport(openport())),os())
-		#producer.send_messages(topic,iotdeviceinfo)
+		iotstring = {"Operating System": "%s" %iotdeviceinfo.operatingsystem, "Port OS": "%s" %iotdeviceinfo.portoperatingsystem, "Port state": "%s" %iotdeviceinfo.portstate, "Port protocol": "%s" %iotdeviceinfo.portservice, "Open ports": "%s" %iotdeviceinfo.openports, "Initial IP Address": "%s" %iotdeviceinfo.ip_addr}
+        	print iotstring
+		#producer.send(topic,iotstring)
+		time.sleep(3)
 		iotdevice += 1
 		print('')
 
+# User selectable input for Total IoT devices
 totaliotdevices = int(raw_input("Enter total IoT devices: "))
+# User selectable input for Kafka topic
+topic = str(raw_input("Enter Kafka topic: "))
+
 
 # Send IoT device info to Kafka broker
-sendiotdata(totaliotdevices)
-
+sendiotdata(totaliotdevices,topic)
