@@ -2,11 +2,11 @@
 from numpy import random
 import time
 import json
-from kafka import SimpleProducer, KafkaClient
+from kafka import KafkaProducer
 
 # connect to Kafka broker
 #producer = KafkaProducer(bootstrap_servers='35.226.74.108:9092',value_serializer=lambda v: json.dumps(v).encode('utf-8'))
-#producer = KafkaProducer(bootstrap_servers='localhost:9092',value_serializer=lambda v: json.dumps(v).encode('utf-8'))
+producer = KafkaProducer(bootstrap_servers='localhost:9092',value_serializer=lambda v: json.dumps(v).encode('utf-8'))
 # assign a topic
 topic = 'test'
 
@@ -134,8 +134,8 @@ def sendiotdata(totaldevices,topic):
 		iotdeviceinfo = IoTdeviceScanData(randomip(1), openport(), stateport(), serviceport(openport()), portos(serviceport(openport())),os())
 		iotstring = {"Operating System": "%s" %iotdeviceinfo.operatingsystem, "Port OS": "%s" %iotdeviceinfo.portoperatingsystem, "Port state": "%s" %iotdeviceinfo.portstate, "Port protocol": "%s" %iotdeviceinfo.portservice, "Open ports": "%s" %iotdeviceinfo.openports, "Initial IP Address": "%s" %iotdeviceinfo.ip_addr}
         	print iotstring
-		#producer.send(topic,iotstring)
-		time.sleep(3)
+		producer.send(topic,iotstring)
+		time.sleep(4)
 		iotdevice += 1
 		print('')
 
