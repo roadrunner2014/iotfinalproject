@@ -1,4 +1,4 @@
-#------------ Kafka test app --------------------
+#aa------------ Kafka test app --------------------
 import threading
 import logging
 import time
@@ -15,11 +15,12 @@ class Producer(threading.Thread):
                                  value_serializer=lambda v: json.dumps(v).encode('utf-8'))
 
         while True:
-            producer.send('my-topic', {"dataObjectID": "test1"})
-            producer.send('my-topic', {"dataObjectID": "test2"})
-            time.sleep(1)
+            producer.send('test', {"dataObjectID": "test1"})
+            producer.send('test', {"dataObjectID": "test2"})
+	    producer.send('test', {"dataObjectID": "test3"})	
+            time.sleep(2)
 
-
+#threading.Thread
 class Consumer(threading.Thread):
     daemon = True
 
@@ -27,7 +28,7 @@ class Consumer(threading.Thread):
         consumer = KafkaConsumer(bootstrap_servers='localhost:9092',
                                  auto_offset_reset='earliest',
                                  value_deserializer=lambda m: json.loads(m).decode('utf-8'))
-        consumer.subscribe(['my-topic'])
+        consumer.subscribe(['test'])
 
         for message in consumer:
             print (message)
