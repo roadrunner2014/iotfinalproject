@@ -84,7 +84,7 @@ def portos(x):
     return opsys
 
 def os():
-    yy = random.randint(0,9)
+    yy = random.randint(0,12)
     sys = str()
     if yy <= 3:
         sys = 'Windows 7'
@@ -92,16 +92,24 @@ def os():
         sys = 'Linux 3.2'
     if yy > 6 and yy <= 8:
         sys = 'Raspbian 10deb9u4'
-    if yy == 9:
+    if yy > 8 and yy <= 10:
         sys = 'RealVNC Enterprise'
+    if yy > 10 and yy <= 12:
+        sys = 'FreeRTOS v10.1.1'
     return sys
 
-def jsonconver(a):
-	js = json.loads(a)
-	return js
+def iottemp():
+    return str(random.randint(0,99))
+
+def iotcpu():
+    return str(random.randint(1,99))
+
+def iotmem():
+    return str(random.randint(1,99))
+
 
 class IoTdeviceScanData(object):
-    def __init__(self, ip_addr, openports, portstate, portservice, portoperatingsystem, operatingsystem):
+    def __init__(self, ip_addr, openports, portstate, portservice, portoperatingsystem, operatingsystem,iottemp,iotcpu,iotmem):
         print("Scanning IoT devices for vulnerabilities...")
 
         self.ip_addr = ip_addr
@@ -110,6 +118,9 @@ class IoTdeviceScanData(object):
         self.portservice = portservice
         self.portoperatingsystem = portoperatingsystem
         self.operatingsystem = operatingsystem
+        self.iottemp = iottemp
+        self.iotcpu = iotcpu
+        self.iotmem = iotmem
 
         print("Initial IP Address: {}".format(self.ip_addr))
         print("Open ports: {}".format(self.openports))
@@ -117,14 +128,17 @@ class IoTdeviceScanData(object):
         print("Port protocol: {}".format(self.portservice))
         print("Port OS: {}").format(self.portoperatingsystem)
         print("Operating System: {}").format(self.operatingsystem)
+        print("IoT temp F deg: {}").format(self.iottemp)
+        print("IoT cpu capacity: {}").format(self.iotcpu)
+        print("IoT memory capacity: {}").format(self.iotmem)
 	
 
 def sendiotdata(totaldevices,topic):
 	iotdevice = 1
 	while iotdevice <= totaldevices:
 		print("IoT device no."), iotdevice
-		iotdeviceinfo = IoTdeviceScanData(randomip(1), openport(), stateport(), serviceport(openport()), portos(serviceport(openport())),os())
-		iotstring = {"Operating System": "%s" %iotdeviceinfo.operatingsystem, "Port OS": "%s" %iotdeviceinfo.portoperatingsystem, "Port state": "%s" %iotdeviceinfo.portstate, "Port protocol": "%s" %iotdeviceinfo.portservice, "Open ports": "%s" %iotdeviceinfo.openports, "Initial IP Address": "%s" %iotdeviceinfo.ip_addr}
+		iotdeviceinfo = IoTdeviceScanData(randomip(1), openport(), stateport(), serviceport(openport()), portos(serviceport(openport())),os(),iottemp(),iotcpu(),iotmem())
+		iotstring = {"IoT temp F deg": "%s" %iotdeviceinfo.iottemp, "IoT cpu capacity": "%s" %iotdeviceinfo.iotcpu, "IoT memory capacity": "%s" %iotdeviceinfo.iotmem, "Operating System": "%s" %iotdeviceinfo.operatingsystem, "Port OS": "%s" %iotdeviceinfo.portoperatingsystem, "Port state": "%s" %iotdeviceinfo.portstate, "Port protocol": "%s" %iotdeviceinfo.portservice, "Open ports": "%s" %iotdeviceinfo.openports, "Initial IP Address": "%s" %iotdeviceinfo.ip_addr}
         	print iotstring
 		#producer.send(topic,iotstring)
 		time.sleep(3)

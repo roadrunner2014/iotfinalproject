@@ -173,7 +173,7 @@ def handler(message):
         producer.flush()
 
 def main():
-    sc = SparkContext(appName="PythonStreamingDirectKafkaWordCount")
+    sc = SparkContext(appName="PythonStreamingIoTdeviceInfo")
     ssc = StreamingContext(sc, 10)
 
     brokers, topic = sys.argv[1:]
