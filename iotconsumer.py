@@ -22,6 +22,7 @@ if __name__ == '__main__':
 
     c = Consumer(**conf)
     c.subscribe(topics)
+    f = open("/home/ubuntu/iotdevicedata.txt", "w")
     try:
         while True:
             msg = c.poll(timeout=1.0)
@@ -41,9 +42,11 @@ if __name__ == '__main__':
                 #sys.stderr.write('%% %s [%d] at offset %d with key %s:\n' % (msg.topic(), msg.partition(), msg.offset(), str(msg.key())))
                 print(msg.value())
 		print(" ")
+		f.write(msg.value() + "\n")
 
     except KeyboardInterrupt:
         sys.stderr.write('%% Aborted by user\n')
 
     # Close down consumer to commit final offsets.
+    f.close()
     c.close()
