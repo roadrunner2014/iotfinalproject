@@ -14,8 +14,9 @@ from confluent_kafka import Consumer, KafkaException, KafkaError
 
 # To generate the random IoT device info use the container below run the commands below
 docker pull roadrunner2014/ubuntu:kafka
-#in containter bin/bash
-/home/ubuntu/iotfinalproject/source CrydermanKafka.sh
+
+# in containter bin/bash
+/home/ubuntu/iotfinalproject/source CrydermanKafka.sh \n
 python /home/ubuntu/iotfinalproject/iotproducer.py
 
 # for consumer run which will create a iotdevicedata.txt file with the consumer output
