@@ -16,7 +16,7 @@ from confluent_kafka import Consumer, KafkaException, KafkaError
 docker pull roadrunner2014/ubuntu:kafka
 
 # in containter bin/bash
-/home/ubuntu/iotfinalproject/source CrydermanKafka.sh
+source /home/ubuntu/iotfinalproject/CrydermanKafka.sh
 
 python /home/ubuntu/iotfinalproject/iotproducer.py
 
