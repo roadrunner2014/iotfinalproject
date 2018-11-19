@@ -19,6 +19,7 @@ if __name__ == '__main__':
         'sasl.password': os.environ['CLOUDKARAFKA_PASSWORD']
     }
 
+
     p = Producer(**conf)
 
     def delivery_callback(err, msg):
