@@ -164,12 +164,13 @@ class IoTdeviceScanData(object):
 
 
 def sendiotdata(totaldevices, topic):
-    iotdevice = random.randint(1,999999)
+    iotdevice = 1
     while iotdevice <= totaldevices:
-        print("IoT device no."), iotdevice
+        iotdevicenumber = random.randint(1,999999)
+        print("IoT device no."), iotdevicenumber
         iotdeviceinfo = IoTdeviceScanData(randomip(1), openport(), stateport(), serviceport(openport()), portos(serviceport(openport())), os(), iottemp(), iotcpu(), iotmem())
         
-	iotstring = 'IoT Device: ' + str(iotdevice) + ',' + 'Initial IP Address: ' + iotdeviceinfo.ip_addr + ',' + 'IoT temp F deg : ' + iotdeviceinfo.iottemp + ',' + 'IoT cpu capacity: ' + iotdeviceinfo.iotcpu + ',' + 'IoT memory capacity: ' + iotdeviceinfo.iotmem + ',' + 'Operating System: ' + iotdeviceinfo.operatingsystem + ',' + 'Port OS: ' + iotdeviceinfo.portoperatingsystem + ',' + 'Port state: ' + iotdeviceinfo.portstate + ',' + 'Port protocol: ' + iotdeviceinfo.portservice + ',' + 'Open ports: ' + iotdeviceinfo.openports
+	iotstring = 'IoT Device: ' + str(iotdevicenumber) + ',' + 'Initial IP Address: ' + iotdeviceinfo.ip_addr + ',' + 'IoT temp F deg : ' + iotdeviceinfo.iottemp + ',' + 'IoT cpu capacity: ' + iotdeviceinfo.iotcpu + ',' + 'IoT memory capacity: ' + iotdeviceinfo.iotmem + ',' + 'Operating System: ' + iotdeviceinfo.operatingsystem + ',' + 'Port OS: ' + iotdeviceinfo.portoperatingsystem + ',' + 'Port state: ' + iotdeviceinfo.portstate + ',' + 'Port protocol: ' + iotdeviceinfo.portservice + ',' + 'Open ports: ' + iotdeviceinfo.openports
         print iotstring
 	
         #producer.send(topic,iotstring)
