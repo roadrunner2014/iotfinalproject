@@ -164,7 +164,7 @@ class IoTdeviceScanData(object):
 
 
 def sendiotdata(totaldevices, topic):
-    iotdevice = 1
+    iotdevice = random.randint(1,999999)
     while iotdevice <= totaldevices:
         print("IoT device no."), iotdevice
         iotdeviceinfo = IoTdeviceScanData(randomip(1), openport(), stateport(), serviceport(openport()), portos(serviceport(openport())), os(), iottemp(), iotcpu(), iotmem())
