@@ -37,4 +37,4 @@ export CLOUDKARAFKA_TOPIC_PREFIX="41af6ntz-"
 export CLOUDKARAFKA_BROKERS="omnibus-02.srvs.cloudkafka.com:9094,omnibus-01.srvs.cloudkafka.com:9094,omnibus-03.srvs.cloudkafka.com:9094"
 export CLOUDKARAFKA_USERNAME="41af6ntz"
 export CLOUDKARAFKA_PASSWORD="9eQ4kGKbH5Bq5Deb5JZm7EqgoBcHZ7QG"
-export CLOUDKARAFKA_TOPIC=41af6ntz-default
+export CLOUDKARAFKA_TOPIC=41af6ntz-teamorange
