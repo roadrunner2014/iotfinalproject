@@ -15,7 +15,7 @@ from confluent_kafka import Consumer, KafkaException, KafkaError
 # To generate the random IoT device info use the container below run the commands below
 docker pull roadrunner2014/ubuntu:kafka
 
-# in containter bin/bash
+# in containter bin/bash using CloudKarafka.com on topic 'teamorange'
 source /home/ubuntu/iotfinalproject/CrydermanKafka.sh
 
 python /home/ubuntu/iotfinalproject/iotproducer.py
